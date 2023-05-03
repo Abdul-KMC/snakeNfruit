@@ -23,4 +23,8 @@ public class LevelManager : MonoBehaviour
         score += value;
         scoreText.text = "Score : " + score;
     }
+
+    public void ResetScore() {
+        score = 0;
+    }
 }
