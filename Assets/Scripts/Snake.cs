@@ -7,11 +7,13 @@ public class Snake : MonoBehaviour
     private Vector2 direction = Vector2.right;
     private List<Transform> segments;
     public Transform segmentPrefab;
+    private LevelManager gameLevelManager;
     // Start is called before the first frame update
     void Start()
     {
         segments = new List<Transform>();
         segments.Add(this.transform);
+        gameLevelManager = FindObjectOfType<LevelManager>();
     }
 
     // Update is called once per frame
@@ -62,6 +64,7 @@ public class Snake : MonoBehaviour
         segments.Add(this.transform);
 
         this.transform.position = Vector3.zero;
+        gameLevelManager.ResetScore();
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
