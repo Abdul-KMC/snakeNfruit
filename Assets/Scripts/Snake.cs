@@ -8,6 +8,8 @@ public class Snake : MonoBehaviour
     private List<Transform> segments;
     public Transform segmentPrefab;
     private LevelManager gameLevelManager;
+    public GameManager gameManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -55,7 +57,8 @@ public class Snake : MonoBehaviour
         segments.Add(segment);
     }
 
-    private void ResetState() {
+    public void ResetState() {
+        gameLevelManager.ResetScore();
         for(int i=1; i<segments.Count; i++) {
             Destroy(segments[i].gameObject);
         }
@@ -64,7 +67,6 @@ public class Snake : MonoBehaviour
         segments.Add(this.transform);
 
         this.transform.position = Vector3.zero;
-        gameLevelManager.ResetScore();
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
@@ -76,6 +78,7 @@ public class Snake : MonoBehaviour
             Grow();
         } else if (other.tag == "Obstacle") {
             ResetState();
+            gameManager.GameOver();
         }
     }
 }
